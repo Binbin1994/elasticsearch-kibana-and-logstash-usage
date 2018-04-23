@@ -1,0 +1,19 @@
+{
+  "name": "node-red-contrib-http-post",
+  "version": "1.0.0",
+  "description": "",
+  "main": "http.js",
+  "keywords": [
+    "http"
+  ],
+  "node-red": {
+    "nodes": {
+      "http-post": "http.js"
+    }
+  },
+  "author": "hongbin",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.85.0"
+  }
+}

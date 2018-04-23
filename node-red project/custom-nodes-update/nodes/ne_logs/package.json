@@ -1,0 +1,19 @@
+{
+  "name": "node-red-contrib-ne-logs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [
+    "logs"
+  ],
+  "node-red": {
+    "nodes": {
+      "ne-logs": "ne-logs.js"
+    }
+  },
+  "author": "ecatgle",
+  "license": "ISC",
+  "dependencies": {
+    "node-red-node-stomp": "0.0.10"
+  }
+}

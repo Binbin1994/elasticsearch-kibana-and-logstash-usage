@@ -1,0 +1,135 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dropdown',{
+        category: 'Read Task',
+        color: '#FFCC66',
+        defaults: {
+            name: {value:""},
+            method:{value:""},
+            attribute:{value:""},
+            index:{value:""},
+            moindex:{value:""},
+            MO:{value:""},
+            Attr:{value:""}
+        },
+        inputs:1,
+        outputs:1,
+        paletteLabel:'Get attribute',
+        icon: "file.png",
+        label: function() {
+            return "Get attribute "+this.Attr||"Get attribute";
+        },
+        oneditprepare: function() {
+         var moarray=[];
+         var first=[];
+         var node=this;
+         var Moindex=node.moindex;
+         var index=node.index;
+         var vals = [];
+         var $secondChoice = $("#node-input-attribute");
+        
+           $.get('mo',function(data) {          
+          
+            for(var i=0;i<data.models.mim.class.length;i++){
+               moarray.push(data.models.mim.class[i]['@name']);             
+             }
+             var $second = $("#node-input-method");
+             $.each(moarray, function(index, value) {
+                        $second.append("<option>" + value + "</option>");
+                });
+           //$("#node-input-method").html($("#node-input-method option").sort(function (a, b) {
+                //return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+             //}))
+            
+            console.log('current index'+node.moindex);
+            if(node.moindex==undefined||node.moindex==""){
+                node.moindex=0;}
+ 
+             console.log('current index'+node.moindex);
+            for(var i=0;i<data.models.mim.class[node.moindex].attribute.length;i++){
+                  vals.push(data.models.mim.class[node.moindex].attribute[i]['@name']);
+               }
+              //var $attr = $("#node-input-attribute");
+              $.each(vals, function(index, value) {
+                     $secondChoice.append("<option>" + value + "</option>");
+               });
+
+            $("#node-input-attribute").html($("#node-input-attribute option").sort(function (a, b) {
+                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+             }))
+
+
+          //$('#node-input-method').val(node.method);
+          //$('#node-input-attribute').val(node.attribute);       
+          //var $secondChoice = $("#node-input-attribute");
+           $secondChoice.data('previousCategoryID', $secondChoice.val());            
+           $("#node-input-MO").change(function() {
+                console.log('json');
+                var $dropdown = $(this);
+                var key = $dropdown.val();
+                for(var i=0;i<data.models.mim.class.length;i++){
+                     if(data.models.mim.class[i]['@name']==key){
+                       node.index=i;  
+                      }
+             }
+                //index=document.getElementById('node-input-method').selectedIndex;
+                //Moindex=index;
+                node.moindex=node.index;
+                //node.index=index;	
+                console.log(node.index);
+                vals = [];
+              for(var i=0;i<data.models.mim.class[node.index].attribute.length;i++){
+                  vals.push(data.models.mim.class[node.index].attribute[i]['@name']);
+               }                
+               $secondChoice = $("#node-input-attribute");
+               $secondChoice.empty();
+               
+               $.each(vals, function(index, value) {
+		  $secondChoice.append("<option>" + value + "</option>");
+		});
+               $("#node-input-attribute").html($("#node-input-attribute option").sort(function (a, b) {
+                return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+             }))              
+                                             
+          });
+                             
+            $('#node-input-method').val(node.method);
+            $('#node-input-attribute').val(node.attribute);
+            //$('#node-input-attribute').val(node.attribute);
+
+               });          
+               
+        },
+        oneditsave: function(){
+            
+
+       }
+        
+    });
+</script>
+
+<script type="text/x-red" data-template-name="dropdown">
+    <div class="form-row">
+       <datalist type="text" id="node-input-method" style="width:70%;">
+           
+        </datalist>               
+    </div>
+    <div class="form-row">
+         <datalist type="text" id="node-input-attribute" style="width:70%;">
+               
+        </datalist>
+    </div>
+   <div class="form-row">
+       <label for="node-input-MO"><i class="icon-tag"></i> MO Class</label>
+       <input type="text" id="node-input-MO" list="node-input-method">
+    </div>
+     <div class="form-row">
+       <label for="node-input-Attr"><i class="icon-tag"></i> MO Attribute</label>
+       <input type="text" id="node-input-Attr" list="node-input-attribute">
+    </div>
+
+
+</script>
+
+<script type="text/x-red" data-help-name="dropdown">
+    <p>A node that shows management object alone with it's attribute</p>
+</script>

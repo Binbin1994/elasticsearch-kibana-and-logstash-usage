@@ -1,0 +1,16 @@
+{
+  "name": "node-red-contrib-dropdown",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dropdown.js",
+  "keywords": [
+    "dropdown"
+  ],
+  "node-red": {
+    "nodes": {
+      "dropdown": "dropdown.js"
+    }
+  },
+  "author": "hongbin",
+  "license": "ISC"
+}

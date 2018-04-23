@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ne-logs',{
+        category: 'Read Task',
+        color: '#FFCC66',
+        defaults: {
+            name: {value:""},
+            cmd: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        paletteLabel: 'Get-Logs',
+        icon: "file.png",
+        label: function() {
+            return this.name||"Get-logs";
+            
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ne-logs">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name"> 
+    </div>
+    <div class="form-row">
+        <p>The template cmd: ssh root@ms-1 " /opt/ericsson/enmutils/bin/cli_app 'cmedit get (query)' " </p><br/> 
+        <label for="node-input-cmd"><i class="icon-tag"></i> Cmd</label>
+        <input type="text" id="node-input-cmd" placeholder="use the above template command">
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="ne-logs">
+    <p>A node to retrieve the logs from a Network Element</p>
+</script>

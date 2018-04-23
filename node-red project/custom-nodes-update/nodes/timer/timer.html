@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('timer',{
+        category: 'Task',
+        color: '#FFCC66',
+        defaults: {
+            time: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.time||"timer";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="timer">
+    <div class="form-row">
+        <label for="node-input-time"><i class="icon-tag"></i>Time</label>
+        <input id="node-input-time" type="time">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="timer">
+    <p>a timer nodes</p>
+</script>
