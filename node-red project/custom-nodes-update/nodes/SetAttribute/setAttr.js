@@ -5,8 +5,8 @@ module.exports = function (RED) {
         this.Attr = config.Attr;
         this.AttrVal = config.AttrVal;
         var fs = require('fs');
-
-        json = JSON.parse(fs.readFileSync('node_model.json', 'utf8'));
+        var Post=require('./post');
+        json = JSON.parse(fs.readFileSync('/home/cloud-user/nodes/GetAttribute/node_model.json', 'utf8'));
         RED.httpAdmin.get("/set", RED.auth.needsPermission('set.read'), function (req, res) {
 
             res.send(json);
@@ -66,6 +66,8 @@ module.exports = function (RED) {
             object.flowid = msg.payload.flowid;
             object.data = data;
             object.id = id;
+            var message="id="+id+"&topology="+string+"&data="+data;
+            Post.post(message);  
             msg.payload = object;
             node.send(msg);
 

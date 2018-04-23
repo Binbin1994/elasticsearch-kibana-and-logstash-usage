@@ -5,9 +5,9 @@ module.exports = function (RED) {
         this.Attr = config.Attr;
         var node = this;
         var json = {};
-
+        var Post=require('./post');
         var fs = require('fs');
-        json = JSON.parse(fs.readFileSync('node_model.json', 'utf8'));
+        json = JSON.parse(fs.readFileSync('/home/cloud-user/nodes/GetAttribute/node_model.json', 'utf8'));
 
 
         RED.httpAdmin.get("/mo", RED.auth.needsPermission('mo.read'), function (req, res) {
@@ -112,6 +112,8 @@ module.exports = function (RED) {
                object.topology=fdn;
                object.data=attribute;
                msg.payload=object;
+               var string="id="+id+"&topology="+fdn+"&data="+attribute;
+               Post.post(string); 
                console.log(msg);
                node.send(msg);
               }

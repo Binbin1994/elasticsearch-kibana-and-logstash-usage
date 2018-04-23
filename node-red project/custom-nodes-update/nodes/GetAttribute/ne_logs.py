@@ -4,7 +4,7 @@ from sys import argv
 import time
 
 import logging
-logging.basicConfig(filename='/var/tmp/log/downloads.log',level=logging.DEBUG,format='%(asctime)s %(message)s')
+logging.basicConfig(filename='/var/tmp/ne_log_downloads.log',level=logging.DEBUG,format='%(asctime)s %(message)s')
 
 enmURL = 'https://enmapache.athtem.eei.ericsson.se'
 enm_username = 'Administrator'

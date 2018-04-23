@@ -12,5 +12,8 @@
     }
   },
   "author": "hongbin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.85.0"
+  }
 }

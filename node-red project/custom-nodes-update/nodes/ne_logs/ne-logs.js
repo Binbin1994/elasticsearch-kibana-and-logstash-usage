@@ -5,7 +5,7 @@ module.exports = function(RED) {
         this.cmd=config.cmd;
         node.on('input',function(msg){
         var tem=[];
-        var array= msg.payload.fdn
+        var array= msg.payload.fdn;
         for(var i=0;i<array.length;i++){
           if(array[i].indexOf('MeContext') != -1){
               //var index=array[i].search('MeContext');
